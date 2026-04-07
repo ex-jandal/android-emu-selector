@@ -85,4 +85,4 @@ The script scans your `ANDROID_AVD_HOME` for directories ending in `.avd`. Once 
 
 ## License
 
-This project is licensed under the terms of the [LICENSE] file included in the repository.
+This project is licensed under the terms of the [LICENSE](LICENSE) file included in the repository.
