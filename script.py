@@ -24,7 +24,6 @@ import subprocess
 
 stats = 0;
 
-QT_PLATFORM = os.getenv("QT_QPA_PLATFORM");
 AVD_HOME = os.getenv("ANDROID_AVD_HOME");
 ANDROID_HOME = os.getenv("ANDROID_HOME");
 executable = f"{ANDROID_HOME}/emulator/emulator"
@@ -134,9 +133,6 @@ executable += f" -avd {device_name}"
 if not has_internet_access:
     executable += " -dns-server 127.0.0.1"
 env_vars = os.environ.copy()
-
-if QT_PLATFORM:
-    env_vars["QT_QPA_PLATFORM"] = QT_PLATFORM;
 
 executable = executable;
 
