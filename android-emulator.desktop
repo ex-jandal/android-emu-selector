@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Android Emulator Selector
+Exec=foot -e /absolute/path/to/script.py
+Icon=android-studio
+Comment=The official Android IDE
+Categories=Development;
+Terminal=false
+StartupNotify=true
+# StartupWMClass=jetbrains-studio
+MimeType=application/x-extension-iml;
