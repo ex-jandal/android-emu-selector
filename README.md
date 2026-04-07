@@ -28,6 +28,10 @@ Before using this script, ensure you have the following environment variables se
    ```bash
    pip install -r requirements.txt
    ```
+   or install it system-wide e.g.:
+   ```bash
+   yay -S python-rich python-readchar
+   ```
 
 ## Usage
 
@@ -42,6 +46,36 @@ python3 script.py
 - **Enter**: Select the highlighted AVD or confirm an option.
 - **Left/Right** or **h/l**: Toggle between "Yes" and "No" for internet access.
 - **Esc** or **q**: Quit the script.
+
+### Desktop Entry
+
+A `.desktop` file is included to help make the script more portable and accessible from your application launcher. To use it:
+
+1. **Copy the file**:
+   ```bash
+   cp android-emulator.desktop ~/.local/share/applications/
+   ```
+
+2. **Customize the configuration**:
+   Edit the `Exec` line in `~/.local/share/applications/android-emulator.desktop` to match your environment:
+   - **Path**: Update `/absolute/path/to/script.py` to the actual path of your script.
+   - **Terminal**: The default uses `foot`. You can change this to your preferred terminal (e.g., `gnome-terminal --`, `alacritty -e`, `konsole -e`).
+   - **Shell**: The command is wrapped in `bash -c`. You can modify this if you use a different shell or need specific environment variables.
+
+   Example for a standard setup:
+   ```ini
+   Exec=gnome-terminal -- python3 /path/to/script.py
+   ```
+   Or:
+   ```ini
+   Exec=foot -e python3 /path/to/script.py
+   ```
+
+   ⚠️ Make like this if your working with Wayland-Compositor e.g.(Niri, Hyprland, ...):
+   ```ini
+   Exec=bash -c "QT_QPA_PLATFORM=xcb gnome-terminal -- python3 /path/to/script.py"
+   ```
+   The command is wrapped in `bash -c`. You can modify this if you use a different shell or need specific environment variables.
 
 ## How it Works
 
