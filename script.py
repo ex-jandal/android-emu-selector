@@ -22,11 +22,9 @@ import sys;
 import pathlib
 import subprocess
 
-stats = 0;
-
 AVD_HOME = os.getenv("ANDROID_AVD_HOME");
 ANDROID_HOME = os.getenv("ANDROID_HOME");
-executable = f"{ANDROID_HOME}/emulator/emulator"
+executable = f"{ANDROID_HOME}/emulator/emulator";
 
 def env_var_not_found(var_name: str):
     sys.stderr.write(
@@ -37,21 +35,21 @@ so you have to set it to where the avd exists.
 """
     );
 
-if AVD_HOME == None:
-    env_var_not_found("ANDROID_AVD_HOME");
-    stats += 1;
-
+stats = 0;
 if ANDROID_HOME == None:
     env_var_not_found("ANDROID_HOME");
     stats += 1;
-
+if AVD_HOME == None:
+    env_var_not_found("ANDROID_AVD_HOME");
+    stats += 1;
 if stats > 0:
-    input("Press Enter...")
     exit(1)
+
+AVD_HOME = str(AVD_HOME); # to fix the linter 'str | None' error
 
 if not pathlib.Path(executable).is_file():
     sys.stderr.write(f"{executable} is not found in your System.\n");
-    exit(1)
+    exit(1);
 
 dirs = [ 
     item.name.split('.')[0]
@@ -59,12 +57,11 @@ dirs = [
     if item.is_dir() and item.name.endswith(".avd")
 ];
 
+SELECTED_STYLE = Style(color="blue", bgcolor="white", bold=True)
 term_size = os.get_terminal_size()
 
 selected = 0
 console = Console()
-
-SELECTED_STYLE = Style(color="blue", bgcolor="white", bold=True)
 
 def generate_devices_table(selected_index) -> Table:
     """Generates a table with highlighting for the selected item."""
@@ -132,9 +129,8 @@ console.print(f"Internet Access? [bold]{has_internet_access}[/]")
 executable += f" -avd {device_name}"
 if not has_internet_access:
     executable += " -dns-server 127.0.0.1"
-env_vars = os.environ.copy()
 
-executable = executable;
+env_vars = os.environ.copy()
 
 subprocess.Popen(
     executable, 
